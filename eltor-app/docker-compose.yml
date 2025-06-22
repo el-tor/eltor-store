@@ -2,7 +2,7 @@ services:
   app_proxy:
     environment:
       APP_HOST: $APP_HOST
-      APP_PORT: 5173
+      APP_PORT: 5175
       PROXY_AUTH_ADD: "false"
     networks:
       - default
