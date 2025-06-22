@@ -1,13 +1,13 @@
 services:
-  app_proxy:
-    environment:
-      APP_HOST: $APP_HOST
-      APP_PORT: 5175
-      PROXY_AUTH_ADD: "false"
-    networks:
-      - default
+  # app_proxy:
+  #   environment:
+  #     APP_HOST: $APP_HOST
+  #     APP_PORT: 5175
+  #     PROXY_AUTH_ADD: "false"
+  #   networks:
+  #     - default
   web:
-    image: eltor/eltor-app:latest
+    image: eltor/eltor-app@sha256:95b229116400eda1534293457f28ab510b98490138546a758a3b9962e2dd315f
     init: true
     stop_grace_period: 1m
     ports:
@@ -17,11 +17,15 @@ services:
       - "0.0.0.0:18058:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
       - "0.0.0.0:9996:9996"   # Tor relay OR port
     environment:
-      - BACKEND_PORT=5174
-      - FRONTEND_PORT=5173
+      - RUST_LOG=info
+      - BACKEND_PORT=${BACKEND_PORT:-5174}
+      - BACKEND_URL=${BACKEND_URL:-http://localhost}
+      - FRONTEND_PORT=${FRONTEND_PORT:-5173}
+      - USE_PHOENIXD_EMBEDDED=${USE_PHOENIXD_EMBEDDED:-true}
+      - PHOENIX_PORT=${PHOENIX_PORT:-9740}
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5174/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:${BACKEND_PORT:-5174}/health"]
       interval: 30s
       timeout: 10s
       retries: 3
