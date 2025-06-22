@@ -2,7 +2,7 @@ manifestVersion: 1
 id: eltor-app
 category: Bitcoin
 name: eltor-app
-version: "0.0.1"
+version: "0.0.2"
 tagline: eltor
 icon: https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/eltor.png
 description: >-
@@ -18,7 +18,7 @@ website: https://eltor.dev
 # dependencies:
 repo: https://github.com/el-tor/eltor-app
 support: https://github.com/el-tor/eltor-app/issues
-port: 5173
+port: 5172
 gallery:
   - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/1-eltor.jpg
   - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/2-eltor.jpg
