@@ -7,7 +7,7 @@ services:
   #   networks:
   #     - default
   web:
-    image: eltor/eltor-app@sha256:95b229116400eda1534293457f28ab510b98490138546a758a3b9962e2dd315f
+    image: eltor/eltor-app@sha256:b87be9c2b1ebe19833f84569af8a4c73861f62c774b7ab6a4a433a8a8140a9fe
     init: true
     stop_grace_period: 1m
     ports:
@@ -19,7 +19,6 @@ services:
     environment:
       - RUST_LOG=info
       - BACKEND_PORT=${BACKEND_PORT:-5174}
-      - BACKEND_URL=${BACKEND_URL:-http://localhost}
       - FRONTEND_PORT=${FRONTEND_PORT:-5173}
       - USE_PHOENIXD_EMBEDDED=${USE_PHOENIXD_EMBEDDED:-true}
       - PHOENIX_PORT=${PHOENIX_PORT:-9740}
