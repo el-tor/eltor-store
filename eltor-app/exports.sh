@@ -1,4 +1,4 @@
-export APP_ELTOR_PORT="5172"
+export APP_ELTOR_PORT="5173"
 export APP_HOST="eltor-app_web_1"
 export PHOENIXD_PASSWORD="test"
 
