@@ -1,2 +1,2 @@
-## This is the El Tor Umnrel Community App Store.
+## El Tor Umbrel Community App Store
 
