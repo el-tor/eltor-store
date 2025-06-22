@@ -11,7 +11,7 @@ services:
     init: true
     stop_grace_period: 1m
     ports:
-      - "0.0.0.0:8080:5174"   # Backend API - explicitly bind to all interfaces
+      - "0.0.0.0:5174:8080"   # Backend API - explicitly bind to all interfaces
       - "0.0.0.0:5173:5173"   # Frontend web server - explicitly bind to all interfaces
       - "0.0.0.0:9740:9740"   # Lightning node - explicitly bind to all interfaces
       - "0.0.0.0:18058:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
