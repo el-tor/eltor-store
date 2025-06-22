@@ -1,0 +1,30 @@
+manifestVersion: 1
+id: eltor-app
+category: Bitcoin
+name: eltor-app
+version: "0.0.1"
+tagline: eltor
+icon: https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/eltor.png
+description: >-
+  Run El Tor.
+
+  features:
+  - paid circuit.
+  - high bandwidth tor network.
+releaseNotes: >-
+  Initial release of El Tor.
+developer: eltor
+website: https://eltor.dev
+# dependencies:
+repo: https://github.com/el-tor/eltor-app
+support: https://github.com/el-tor/eltor-app/issues
+port: 3699
+gallery:
+  - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/1-eltor.jpg
+  - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/2-eltor.jpg
+  - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/3-eltor.jpg
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+submitter: eltordev
+submission: https://github.com/el-tor/eltor-app/pull/1
