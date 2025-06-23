@@ -7,7 +7,7 @@ services:
   #   networks:
   #     - default
   web:
-    image: eltor/eltor-app@sha256:2551e767c136691700ee2680fd7a8b43b7e88ea85d5d53739b53832b8e8e4c1a
+    image: eltor/eltor-app@sha256:4d95f434cb942520edd57ab2e80b5043a71ec2a5fd507fd639449408c9fc9ca8
     init: true
     stop_grace_period: 1m
     ports:
