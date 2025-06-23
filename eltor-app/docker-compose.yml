@@ -18,6 +18,10 @@ services:
       - "0.0.0.0:9996:9996"   # Tor relay OR port
     volumes:
       - ${APP_DATA_DIR}/data/phoenix:/home/user/.phoenix
+      - ${APP_DATA_DIR}/data/eltor/torrc:/home/user/code/eltor-app/backend/bin/torrc
+      - ${APP_DATA_DIR}/data/eltor/torrc.relay:/home/user/code/eltor-app/backend/bin/torrc.relay
+      - ${APP_DATA_DIR}/data/eltor/payments_sent.json:/home/user/code/eltor-app/backend/bin/payments_sent.json
+      - ${APP_DATA_DIR}/data/eltor/payments_received.json:/home/user/code/eltor-app/backend/bin/payments_received.json
     user: "1000:1000"
     environment:
       - RUST_LOG=info
