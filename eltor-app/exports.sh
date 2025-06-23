@@ -8,7 +8,7 @@ export PHOENIXD_PASSWORD="test"
 export TOR_ADDITIONAL_DIR_AUTHORITY=""
 # TODO user should be able to set this
 export TOR_NICKNAME="elfdbe78324"
-export TOR_DATA_DIRECTORY="/home/eltor/data/tor"
+export TOR_DATA_DIRECTORY="/home/user/data/tor"
 export TOR_SOCKS_PORT="0.0.0.0:18058"
 export TOR_CONTROL_PORT="9992"
 # password1234_
@@ -22,7 +22,7 @@ export TOR_RELAY_PAYMENT_LIGHTNING_NODE_CONFIG="type=phoenixd url=http://127.0.0
 ### Relay Environment Variables
 #################################
 export TOR_RELAY_ADDITIONAL_DIR_AUTHORITY="" 
-export TOR_RELAY_DATA_DIRECTORY="/home/eltor/data/tor-relay"
+export TOR_RELAY_DATA_DIRECTORY="/home/user/data/tor-relay"
 # export TOR_RELAY_ADDRESS="X.X.X.X" # public IP or domain of the relay
 export TOR_RELAY_CONTACT="eltorcontact"
 # TODO user should be able to set this
