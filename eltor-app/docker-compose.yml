@@ -17,8 +17,7 @@ services:
       - "0.0.0.0:18058:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
       - "0.0.0.0:9996:9996"   # Tor relay OR port
     volumes:
-      - "${APP_DATA_DIR}/data/eltor:/home/eltor"
-      - "${APP_DATA_DIR}/data/phoenix:/home/eltor/.phoenix"
+      - "${APP_DATA_DIR}/data/home/eltor:/home/eltor"
     environment:
       - RUST_LOG=info
       - BACKEND_PORT=${BACKEND_PORT:-5174}
