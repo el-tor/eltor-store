@@ -20,9 +20,9 @@ repo: https://github.com/el-tor/eltor-app
 support: https://github.com/el-tor/eltor-app/issues
 port: 5173
 gallery:
-  - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/1-eltor.jpg
-  - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/2-eltor.jpg
-  - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/3-eltor.jpg
+  - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/1.png
+  - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/2.png
+  - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/3.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""
