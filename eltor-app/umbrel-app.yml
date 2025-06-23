@@ -9,8 +9,11 @@ description: >-
   Run El Tor.
 
   features:
+
   - paid circuit.
+
   - high bandwidth tor network.
+  
 releaseNotes: >-
   Initial release of El Tor.
 developer: eltor
