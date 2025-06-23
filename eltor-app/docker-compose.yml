@@ -18,7 +18,7 @@ services:
       - "0.0.0.0:9996:9996"   # Tor relay OR port
     volumes:
       - ${APP_DATA_DIR}/data/phoenix:/home/eltor/.phoenix
-    user: "1001:1001"
+    user: "1000:1000"
     environment:
       - RUST_LOG=info
       - BACKEND_PORT=${BACKEND_PORT:-5174}
