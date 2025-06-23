@@ -16,6 +16,8 @@ services:
       - "0.0.0.0:9740:9740"   # Lightning node - explicitly bind to all interfaces
       - "0.0.0.0:18058:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
       - "0.0.0.0:9996:9996"   # Tor relay OR port
+    volumes:
+      - /data:/home/eltor
     environment:
       - RUST_LOG=info
       - BACKEND_PORT=${BACKEND_PORT:-5174}
