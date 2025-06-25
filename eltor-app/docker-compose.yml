@@ -19,6 +19,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/phoenix:/home/user/.phoenix
       - ${APP_DATA_DIR}/data/eltor:/home/user/code/eltor-app/backend/bin/data
+      - ${APP_LIGHTNING_NODE_DATA_DIR}:/lnd:ro
     user: "1000:1000"
     environment:
       - RUST_LOG=info
@@ -26,6 +27,10 @@ services:
       - FRONTEND_PORT=${FRONTEND_PORT:-5173}
       - USE_PHOENIXD_EMBEDDED=${USE_PHOENIXD_EMBEDDED:-true}
       - PHOENIX_PORT=${PHOENIX_PORT:-9740}
+      - LN_IMPLEMENTATION=${LN_IMPLEMENTATION:-"LND"}
+      - LN_SERVER_URL="https://$APP_LIGHTNING_NODE_IP:$APP_LIGHTNING_NODE_REST_PORT"
+      - MACAROON_PATH="/lnd/data/chain/bitcoin/$APP_BITCOIN_NETWORK"
+      - CONFIG_PATH="/lnd/umbrel-lnd.conf"
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${BACKEND_PORT:-5174}/health"]
