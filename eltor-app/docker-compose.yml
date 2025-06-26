@@ -7,7 +7,7 @@ services:
   #   networks:
   #     - default
   web:
-    image: eltor/eltor-app@sha256:fdaa0bf6c0cb4a23cc73f1b78955030d695bbb132dceccdc260690a64742f241
+    image: eltor/eltor-app@latest
     init: true
     stop_grace_period: 1m
     ports:
@@ -18,18 +18,16 @@ services:
       - "0.0.0.0:9996:9996"   # Tor relay OR port
     volumes:
       - ${APP_DATA_DIR}/data/phoenix:/home/user/.phoenix
-      - ${APP_DATA_DIR}/data/eltor:/home/user/code/eltor-app/backend/bin/data
-      - "${APP_CORE_LIGHTNING_DATA_DIR}:/root/.lightning:ro"
     user: "1000:1000"
     environment:
-      RUST_LOG: info
-      BACKEND_PORT: ${BACKEND_PORT:-5174}
-      FRONTEND_PORT: ${FRONTEND_PORT:-5173}
-      USE_PHOENIXD_EMBEDDED: ${USE_PHOENIXD_EMBEDDED:-false}
-      PHOENIX_PORT: ${PHOENIX_PORT:-9740}
-      LN_IMPLEMENTATION: "CLN"
-      LN_SERVER_URL: "https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT"
-      RUNE_PATH: "/root/.lightning/.commando-env"
+      - RUST_LOG=info
+      - BACKEND_PORT=${BACKEND_PORT:-5174}
+      - FRONTEND_PORT=${FRONTEND_PORT:-5173}
+      - USE_PHOENIXD_EMBEDDED=${USE_PHOENIXD_EMBEDDED:-true}
+      - PHOENIX_PORT=${PHOENIX_PORT:-9740}
+      - LN_IMPLEMENTATION=${LN_IMPLEMENTATION:-"CLN"}
+      - LN_SERVER_URL=${LN_SERVER_URL:-"https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT"}
+      - RUNE_PATH=${RUNE_PATH:-"/root/.lightning/.commando-env"}
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${BACKEND_PORT:-5174}/health"]
