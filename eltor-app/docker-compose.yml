@@ -18,7 +18,9 @@ services:
       - "0.0.0.0:9996:9996"   # Tor relay OR port
     volumes:
       - ${APP_DATA_DIR}/data/phoenix:/home/user/.phoenix
-      - ${APP_CORE_LIGHTNING_DATA_DIR}:/home/user/.lightning:ro
+      # Mount both CLN and LND data directories (will be empty if not installed)
+      - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/home/user/.lightning:ro
+      - ${APP_LIGHTNING_DATA_DIR:-/tmp/empty}:/home/user/.lnd:ro
     user: "1000:1000"
     env_file:
       - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
@@ -28,12 +30,20 @@ services:
       - FRONTEND_PORT=${FRONTEND_PORT:-5173}
       - USE_PHOENIXD_EMBEDDED=${USE_PHOENIXD_EMBEDDED:-true}
       - PHOENIX_PORT=${PHOENIX_PORT:-9740}
-      - LN_IMPLEMENTATION=${LN_IMPLEMENTATION:-"CLN"}
       - LN_SERVER_URL=${LN_SERVER_URL:-"https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT"}
       - RUNE_PATH=${RUNE_PATH:-"/home/user/.lightning/.commando-env"}
       - ELTORRC_PATH="/home/user/code/eltor-app/backend/bin/data/torrc"
       - TOR_RELAY_PAYMENT_LIGHTNING_NODE_CONFIG=type=cln url=$LN_SERVER_URL password=$LIGHTNING_RUNE default=true
       - TOR_CLIENT_PAYMENT_LIGHTNING_NODE_CONFIG=type=cln url=$LN_SERVER_URL password=$LIGHTNING_RUNE default=true
+      # Auto-detect Lightning implementation
+      - LN_IMPLEMENTATION=${LN_IMPLEMENTATION:-"AUTO"}
+      # CLN configuration
+      - CLN_SERVER_URL=${CLN_SERVER_URL:-"https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT"}
+      - CLN_RUNE_PATH="/home/user/.lightning/.commando-env"
+      # LND configuration  
+      - LND_SERVER_URL=${LND_SERVER_URL:-"https://$APP_LIGHTNING_DAEMON_IP:$LIGHTNING_REST_PORT"}
+      - LND_MACAROON_PATH="/home/user/.lnd/data/chain/bitcoin/mainnet/admin.macaroon"
+      - LND_TLS_CERT_PATH="/home/user/.lnd/tls.cert"
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${BACKEND_PORT:-5174}/health"]
