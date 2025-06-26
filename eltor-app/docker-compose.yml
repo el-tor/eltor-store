@@ -19,8 +19,9 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/phoenix:/home/user/.phoenix
       - ${APP_CORE_LIGHTNING_DATA_DIR}:/home/user/.lightning:ro
-      - ./entrypoint.sh:/home/user/entrypoint.sh
     user: "1000:1000"
+    env_file:
+      - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
     environment:
       - RUST_LOG=info
       - BACKEND_PORT=${BACKEND_PORT:-5174}
@@ -31,8 +32,8 @@ services:
       - LN_SERVER_URL=${LN_SERVER_URL:-"https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT"}
       - RUNE_PATH=${RUNE_PATH:-"/home/user/.lightning/.commando-env"}
       - ELTORRC_PATH="/home/user/code/eltor-app/backend/bin/data/torrc"
+      - TOR_RELAY_PAYMENT_LIGHTNING_NODE_CONFIG="type=cln url=$LN_SERVER_URL password=${LIGHTNING_RUNE} default=true"
     restart: unless-stopped
-    entrypoint: ["sh", "/home/user/entrypoint.sh"]
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${BACKEND_PORT:-5174}/health"]
       interval: 30s
