@@ -19,8 +19,8 @@ releaseNotes: >-
 developer: eltor
 website: https://eltor.dev
 dependencies:
-  - core-lightning
   - lightning
+  - core-lightning
 repo: https://github.com/el-tor/eltor-app
 support: https://github.com/el-tor/eltor-app/issues
 port: 5173
