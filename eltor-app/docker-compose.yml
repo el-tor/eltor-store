@@ -32,7 +32,7 @@ services:
       - RUNE_PATH=${RUNE_PATH:-"/home/user/.lightning/.commando-env"}
       - ELTORRC_PATH="/home/user/code/eltor-app/backend/bin/data/torrc"
     restart: unless-stopped
-    entrypoint: ["/home/user/entrypoint.sh"]
+    entrypoint: ["sh", "/home/user/entrypoint.sh"]
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${BACKEND_PORT:-5174}/health"]
       interval: 30s
