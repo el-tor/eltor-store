@@ -19,6 +19,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/phoenix:/home/user/.phoenix
       - ${APP_CORE_LIGHTNING_DATA_DIR}:/home/user/.lightning:ro
+      - ./entrypoint.sh:/entrypoint.sh
     user: "1000:1000"
     environment:
       - RUST_LOG=info
