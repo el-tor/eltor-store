@@ -16,7 +16,7 @@ export TOR_HASHED_CONTROL_PASSWORD="16:281EC5644A4F548A60D50A0DD4DF835FFD50EDED0
 export TOR_ADDRESS="127.0.0.1"
 export TOR_PAYMENT_CIRCUIT_MAX_FEE="11000"
 # this is injected in via the start.sh script
-#export TOR_RELAY_PAYMENT_LIGHTNING_NODE_CONFIG="type=phoenixd url=http://127.0.0.1:9740 password=$PHOENIXD_PASSWORD default=true"
+export TOR_CLIENT_PAYMENT_LIGHTNING_NODE_CONFIG="type=cln url=$LN_SERVER_URL password=$LIGHTNING_RUNE default=true"
 
 #################################
 ### Relay Environment Variables
@@ -39,5 +39,4 @@ export TOR_RELAY_PAYMENT_RATE_MSATS="1000"
 export TOR_RELAY_PAYMENT_INTERVAL="60"
 export TOR_RELAY_PAYMENT_INTERVAL_ROUNDS="10"
 export TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE="11000"
-# this is injected in via the docker-compose.yml file
-#export TOR_RELAY_PAYMENT_LIGHTNING_NODE_CONFIG="type=phoenixd url=http://127.0.0.1:9740 password=$PHOENIXD_PASSWORD default=true"
+export TOR_RELAY_PAYMENT_LIGHTNING_NODE_CONFIG="type=cln url=$LN_SERVER_URL password=$LIGHTNING_RUNE default=true"
