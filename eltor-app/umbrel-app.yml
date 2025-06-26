@@ -1,4 +1,4 @@
-manifestVersion: 1
+manifestVersion: 1.1
 id: eltor-app
 category: Bitcoin
 name: eltor-app
@@ -18,8 +18,8 @@ releaseNotes: >-
   Initial release of El Tor.
 developer: eltor
 website: https://eltor.dev
-#dependencies:
-#  - name: lightning
+dependencies:
+  - core-lightning
 repo: https://github.com/el-tor/eltor-app
 support: https://github.com/el-tor/eltor-app/issues
 port: 5173
