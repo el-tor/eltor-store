@@ -22,8 +22,9 @@ services:
       - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/home/user/.lightning:ro
       - ${APP_LIGHTNING_DATA_DIR:-/tmp/empty}:/home/user/.lnd:ro
     user: "1000:1000"
+    # Only set env_file if APP_LIGHTNING_DATA_DIR exists
     env_file:
-      - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
+      - ${APP_LIGHTNING_DATA_DIR:-/does/not/exist}/.commando-env
     environment:
       - RUST_LOG=info
       - BACKEND_PORT=${BACKEND_PORT:-5174}
