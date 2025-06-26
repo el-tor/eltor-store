@@ -18,9 +18,9 @@ releaseNotes: >-
   Initial release of El Tor.
 developer: eltor
 website: https://eltor.dev
-dependencies: []
-optionalDependencies:
+dependencies:
   - core-lightning
+optionalDependencies:
   - lightning
 repo: https://github.com/el-tor/eltor-app
 support: https://github.com/el-tor/eltor-app/issues
