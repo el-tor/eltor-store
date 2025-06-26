@@ -32,6 +32,8 @@ services:
       - LN_SERVER_URL=${LN_SERVER_URL:-"https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT"}
       - RUNE_PATH=${RUNE_PATH:-"/home/user/.lightning/.commando-env"}
       - ELTORRC_PATH="/home/user/code/eltor-app/backend/bin/data/torrc"
+      - TOR_RELAY_PAYMENT_LIGHTNING_NODE_CONFIG=type=cln url=$LN_SERVER_URL password=$LIGHTNING_RUNE default=true
+      - TOR_CLIENT_PAYMENT_LIGHTNING_NODE_CONFIG=type=cln url=$LN_SERVER_URL password=$LIGHTNING_RUNE default=true
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${BACKEND_PORT:-5174}/health"]
