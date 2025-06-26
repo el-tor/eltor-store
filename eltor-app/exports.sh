@@ -15,6 +15,8 @@ export TOR_CONTROL_PORT="9992"
 export TOR_HASHED_CONTROL_PASSWORD="16:281EC5644A4F548A60D50A0DD4DF835FFD50EDED062FD270D7269943DA"
 export TOR_ADDRESS="127.0.0.1"
 export TOR_PAYMENT_CIRCUIT_MAX_FEE="11000"
+# Placeholder - will be overridden by docker-compose environment
+export TOR_CLIENT_PAYMENT_LIGHTNING_NODE_CONFIG="placeholder"
 
 #################################
 ### Relay Environment Variables
@@ -37,3 +39,5 @@ export TOR_RELAY_PAYMENT_RATE_MSATS="1000"
 export TOR_RELAY_PAYMENT_INTERVAL="60"
 export TOR_RELAY_PAYMENT_INTERVAL_ROUNDS="10"
 export TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE="11000"
+# Placeholder - will be overridden by docker-compose environment
+export TOR_RELAY_PAYMENT_LIGHTNING_NODE_CONFIG="placeholder"
