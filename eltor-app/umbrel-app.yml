@@ -2,7 +2,7 @@ manifestVersion: 1
 id: eltor-app
 category: Bitcoin
 name: eltor-app
-version: "0.0.3"
+version: '0.0.4'
 tagline: eltor
 icon: https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/eltor.png
 description: >-
@@ -13,13 +13,13 @@ description: >-
   - paid circuit.
 
   - high bandwidth tor network.
-  
+
 releaseNotes: >-
   Initial release of El Tor.
 developer: eltor
 website: https://eltor.dev
-dependencies:
-  - name: lightning
+#dependencies:
+#  - name: lightning
 repo: https://github.com/el-tor/eltor-app
 support: https://github.com/el-tor/eltor-app/issues
 port: 5173
@@ -27,8 +27,8 @@ gallery:
   - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/1.png
   - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/2.png
   - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/3.png
-path: ""
-defaultUsername: ""
-defaultPassword: ""
+path: ''
+defaultUsername: ''
+defaultPassword: ''
 submitter: eltordev
 submission: https://github.com/el-tor/eltor-app/pull/1
