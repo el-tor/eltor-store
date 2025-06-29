@@ -68,7 +68,29 @@ services:
       - APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE=${APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE}
 
 
-    entrypoint: ["bash", "/home/user/code/eltor-app/backend/bin/data/entrypoint.sh"]
+    command: |
+      bash -c '
+      echo "Starting El Tor with Lightning auto-detection..."
+      
+      # Runtime Lightning detection
+      if [ -f "/home/user/.lightning/.commando-env" ]; then
+          echo "✅ Core Lightning detected"
+          set -a
+          source "/home/user/.lightning/.commando-env"
+          set +a
+          export LN_IMPLEMENTATION="cln"
+          export APP_ELTOR_LN_CONFIG="type=cln url=https://$$APP_CORE_LIGHTNING_DAEMON_IP:$$CORE_LIGHTNING_REST_PORT rune=$$LIGHTNING_RUNE default=true"
+      elif [ -f "/home/user/.lnd/tls.cert" ]; then
+          echo "✅ LND detected"  
+          export LN_IMPLEMENTATION="lnd"
+      else
+          echo "✅ Using embedded Phoenix"
+          export LN_IMPLEMENTATION="phoenix"
+          export APP_ELTOR_LN_CONFIG="type=phoenix url=http://localhost:9740 default=true"
+      fi
+      
+      echo "Lightning implementation: $$LN_IMPLEMENTATION"
+      echo "Lightning config: $$APP_ELTOR_LN_CONFIG"
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${BACKEND_PORT:-5174}/health"]
