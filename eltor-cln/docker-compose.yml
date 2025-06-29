@@ -1,11 +1,11 @@
 services:
-  # app_proxy:
-  #   environment:
-  #     APP_HOST: $APP_HOST
-  #     APP_PORT: 5175
-  #     PROXY_AUTH_ADD: "false"
-  #   networks:
-  #     - default
+  app_proxy:
+    environment:
+      APP_HOST: $APP_ELTOR_CLN_HOST
+      APP_PORT: 5183
+      PROXY_AUTH_ADD: "false"
+    networks:
+      - default
   web:
     image: eltor/eltor-app@sha256:fb7f08cf33d1dab5cd5b5ed0e0bfca67d775bbd23fe8d45b2a808158f8dfcf20
     init: true
