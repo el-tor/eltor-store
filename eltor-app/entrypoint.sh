@@ -26,6 +26,3 @@ fi
 
 echo "Lightning implementation: $LN_IMPLEMENTATION"
 echo "Lightning config: $LN_CONFIG"
-
-# Start your application with the dynamically configured environment
-exec "$@"
