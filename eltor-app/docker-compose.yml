@@ -69,7 +69,7 @@ services:
       - APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE=${APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE}
 
 
-    entrypoint: ["/home/user/entrypoint.sh"]
+    entrypoint: ["bash", "/home/user/entrypoint.sh"]
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${BACKEND_PORT:-5174}/health"]
