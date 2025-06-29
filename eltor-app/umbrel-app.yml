@@ -1,7 +1,7 @@
 manifestVersion: 1
-id: eltor-app-cln
+id: eltor-app
 category: Bitcoin
-name: eltor-app-cln
+name: eltor-app
 version: '0.0.7'
 tagline: eltor
 icon: https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/eltor.png
