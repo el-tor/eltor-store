@@ -21,7 +21,7 @@ export APP_ELTOR_LN_BOLT12="lno1234"
 export APP_ELTOR_TOR_ADDITIONAL_DIR_AUTHORITY=""
 # TODO user should be able to set this
 export APP_ELTOR_TOR_NICKNAME="elfdbe78324"
-export APP_ELTOR_TOR_DATA_DIRECTORY="/home/user/.tor"
+export APP_ELTOR_TOR_DATA_DIRECTORY="/home/user/data/tor"
 export APP_ELTOR_TOR_SOCKS_PORT="0.0.0.0:18058"
 export APP_ELTOR_TOR_CONTROL_PORT="9992"
 # password1234_
@@ -33,7 +33,7 @@ export APP_ELTOR_TOR_PAYMENT_CIRCUIT_MAX_FEE="11000"
 ### Relay Eltor Environment Variables
 ######################################
 export APP_ELTOR_TOR_RELAY_ADDITIONAL_DIR_AUTHORITY="" 
-export APP_ELTOR_TOR_RELAY_DATA_DIRECTORY="/home/user/.tor/relay"
+export APP_ELTOR_TOR_RELAY_DATA_DIRECTORY="/home/user/data/tor-relay"
 # export APP_ELTOR_TOR_RELAY_ADDRESS="X.X.X.X" # public IP or domain of the relay
 export APP_ELTOR_TOR_RELAY_CONTACT="eltorcontact"
 # TODO user should be able to set this
