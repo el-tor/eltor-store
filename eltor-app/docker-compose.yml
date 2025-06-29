@@ -39,7 +39,6 @@ services:
       # LN env vars (from .env file)
       - APP_ELTOR_USE_PHOENIXD_EMBEDDED=${APP_ELTOR_USE_PHOENIXD_EMBEDDED}
       - APP_ELTOR_LN_IMPLEMENTATION=${APP_ELTOR_LN_IMPLEMENTATION}
-      - APP_ELTOR_LN_CONFIG="type=cln url=https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT rune=$LIGHTNING_RUNE default=true"
       - APP_ELTOR_LN_BOLT12=${APP_ELTOR_LN_BOLT12}
 
       # Client Eltor Environment Variables
