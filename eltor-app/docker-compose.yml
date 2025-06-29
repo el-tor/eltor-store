@@ -28,7 +28,6 @@ services:
       # Core Lightning env vars
       - APP_CORE_LIGHTNING_DAEMON_IP=${APP_CORE_LIGHTNING_DAEMON_IP}
       - CORE_LIGHTNING_REST_PORT=${CORE_LIGHTNING_REST_PORT}
-      - CLN_LIGHTNING_RUNE=${LIGHTNING_RUNE}
 
       # App env vars
       - APP_ELTOR_FRONTEND_PORT=${APP_ELTOR_FRONTEND_PORT}
@@ -40,6 +39,7 @@ services:
       - APP_ELTOR_USE_PHOENIXD_EMBEDDED=${APP_ELTOR_USE_PHOENIXD_EMBEDDED}
       - APP_ELTOR_LN_IMPLEMENTATION=${APP_ELTOR_LN_IMPLEMENTATION}
       - APP_ELTOR_LN_BOLT12=${APP_ELTOR_LN_BOLT12}
+      - APP_ELTOR_LN_CONFIG="type=cln url=https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT rune=LIGHTNING_RUNE_PLACEHOLDER default=true"
 
       # Client Eltor Environment Variables
       - APP_ELTOR_TOR_ADDITIONAL_DIR_AUTHORITY=${APP_ELTOR_TOR_ADDITIONAL_DIR_AUTHORITY}
@@ -67,30 +67,6 @@ services:
       - APP_ELTOR_TOR_RELAY_PAYMENT_INTERVAL_ROUNDS=${APP_ELTOR_TOR_RELAY_PAYMENT_INTERVAL_ROUNDS}
       - APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE=${APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE}
 
-
-    command: |
-      bash -c '
-      echo "Starting El Tor with Lightning auto-detection..."
-      
-      # Runtime Lightning detection
-      if [ -f "/home/user/.lightning/.commando-env" ]; then
-          echo "✅ Core Lightning detected"
-          set -a
-          source "/home/user/.lightning/.commando-env"
-          set +a
-          export LN_IMPLEMENTATION="cln"
-          export APP_ELTOR_LN_CONFIG="type=cln url=https://$$APP_CORE_LIGHTNING_DAEMON_IP:$$CORE_LIGHTNING_REST_PORT rune=$$LIGHTNING_RUNE default=true"
-      elif [ -f "/home/user/.lnd/tls.cert" ]; then
-          echo "✅ LND detected"  
-          export LN_IMPLEMENTATION="lnd"
-      else
-          echo "✅ Using embedded Phoenix"
-          export LN_IMPLEMENTATION="phoenix"
-          export APP_ELTOR_LN_CONFIG="type=phoenix url=http://localhost:9740 default=true"
-      fi
-      
-      echo "Lightning implementation: $$LN_IMPLEMENTATION"
-      echo "Lightning config: $$APP_ELTOR_LN_CONFIG"
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${BACKEND_PORT:-5174}/health"]
@@ -100,6 +76,24 @@ services:
       start_period: 40s
     networks:
       - default
+
+  # runs after the main service to update the torrc file with the LIGHTNING_RUNE
+  # Replace the placeholder {{RUNE}} with the actual value from the environment
+  post_install:
+    image: alpine:latest
+    depends_on:
+      web:
+        condition: service_healthy
+    env_file:
+      - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
+    volumes:
+      - ${APP_ELTOR_DATA_DIR}:/tmp/.eltor
+      - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/tmp/.lightning:ro
+    command: >
+      sh -c "
+        echo 'torrc-updater ready for commands...' && 
+        tail -f /dev/null
+      "
 
 networks:
   default:
