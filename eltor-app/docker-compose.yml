@@ -22,6 +22,8 @@ services:
       - ${APP_DATA_DIR}/data/phoenix:/home/user/.phoenix
       - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/home/user/.lightning:ro
     user: "1000:1000"
+    env_file:
+      - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
     environment:
       # Core Lightning env vars
       - APP_CORE_LIGHTNING_DAEMON_IP=${APP_CORE_LIGHTNING_DAEMON_IP}
