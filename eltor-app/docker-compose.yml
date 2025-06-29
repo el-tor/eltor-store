@@ -39,7 +39,6 @@ services:
       - APP_ELTOR_USE_PHOENIXD_EMBEDDED=${APP_ELTOR_USE_PHOENIXD_EMBEDDED}
       - APP_ELTOR_LN_IMPLEMENTATION=${APP_ELTOR_LN_IMPLEMENTATION}
       - APP_ELTOR_LN_BOLT12=${APP_ELTOR_LN_BOLT12}
-      - APP_ELTOR_LN_CONFIG="type=cln url=https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT rune={{LIGHTNING_RUNE}} default=true"
 
       # Client Eltor Environment Variables
       - APP_ELTOR_TOR_ADDITIONAL_DIR_AUTHORITY=${APP_ELTOR_TOR_ADDITIONAL_DIR_AUTHORITY}
@@ -78,7 +77,7 @@ services:
       - default
 
   # runs after the main service to update the torrc file with the LIGHTNING_RUNE
-  # Replace the placeholder {{RUNE}} with the actual value from the environment
+  # Replace the placeholder {{LIGHTNING_RUNE}} with the actual value from the environment variable
   post_install:
     image: nginx:alpine
     depends_on:
