@@ -21,7 +21,7 @@ services:
       - ${APP_DATA_DIR}/data/eltor:/home/user/code/eltor-app/backend/bin/data
       - ${APP_DATA_DIR}/data/phoenix:/home/user/.phoenix
       - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/home/user/.lightning:ro
-      - ./entrypoint.sh:/entrypoint.sh:ro
+      - ./entrypoint.sh:/home/user/entrypoint.sh:ro
     user: "1000:1000"
     env_file:
       - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
@@ -69,7 +69,7 @@ services:
       - APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE=${APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE}
 
 
-    entrypoint: ["/entrypoint.sh"]
+    entrypoint: ["/home/user/entrypoint.sh"]
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${BACKEND_PORT:-5174}/health"]
