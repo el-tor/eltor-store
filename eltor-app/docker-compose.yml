@@ -19,9 +19,6 @@ services:
     volumes:
       # TODO move to /home/user/.eltor
       - ${APP_DATA_DIR}/data/eltor:/home/user/backend/bin/data
-      - ${APP_DATA_DIR}/data/tor:/home/user/data/tor
-      - ${APP_DATA_DIR}/data/tor-relay:/home/user/data/tor-relay
-      - ${APP_DATA_DIR}/data/eltor-logs:/home/user/code/
       - ${APP_DATA_DIR}/data/phoenix:/home/user/.phoenix
       - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/home/user/.lightning:ro
     user: "1000:1000"
@@ -81,21 +78,21 @@ services:
 
   # runs after the main service to update the torrc file with the LIGHTNING_RUNE
   # Replace the placeholder {{RUNE}} with the actual value from the environment
-  torrc-updater:
-    image: alpine:latest
-    depends_on:
-      web:
-        condition: service_healthy
-    env_file:
-      - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
-    volumes:
-      - ${APP_DATA_DIR}/data/eltor:/tmp
-      - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/tmp/.lightning:ro
-    command: >
-      sh -c "
-        sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /tmp/torrc &&
-        sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /tmp/torrc.relay
-      "
+  # torrc-updater:
+  #   image: alpine:latest
+  #   depends_on:
+  #     web:
+  #       condition: service_healthy
+  #   env_file:
+  #     - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
+  #   volumes:
+  #     - ${APP_DATA_DIR}/data/eltor:/tmp
+  #     - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/tmp/.lightning:ro
+  #   command: >
+  #     sh -c "
+  #       sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /tmp/torrc &&
+  #       sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /tmp/torrc.relay
+  #     "
 
 networks:
   default:
