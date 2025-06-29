@@ -39,7 +39,7 @@ services:
       - APP_ELTOR_USE_PHOENIXD_EMBEDDED=${APP_ELTOR_USE_PHOENIXD_EMBEDDED}
       - APP_ELTOR_LN_IMPLEMENTATION=${APP_ELTOR_LN_IMPLEMENTATION}
       - APP_ELTOR_LN_BOLT12=${APP_ELTOR_LN_BOLT12}
-      - APP_ELTOR_LN_CONFIG="type=cln url=https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT rune=$LIGHTNING_RUNE default=true"
+      - APP_ELTOR_LN_CONFIG="type=cln url=https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT rune={{RUNE}} default=true"
 
       # Client Eltor Environment Variables
       - APP_ELTOR_TOR_ADDITIONAL_DIR_AUTHORITY=${APP_ELTOR_TOR_ADDITIONAL_DIR_AUTHORITY}
@@ -67,6 +67,12 @@ services:
       - APP_ELTOR_TOR_RELAY_PAYMENT_INTERVAL_ROUNDS=${APP_ELTOR_TOR_RELAY_PAYMENT_INTERVAL_ROUNDS}
       - APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE=${APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE}
 
+    # Replace the placeholder $$RUNE$$ with the actual value from the environment
+    command: >
+      sh -c "
+        sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /home/user/.eltor/torrc &&
+        sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /home/user/.eltor/torrc.relay
+      "
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${BACKEND_PORT:-5174}/health"]
