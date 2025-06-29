@@ -90,7 +90,7 @@ services:
       - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/tmp/.lightning:ro
     command: >
       sh -c "
-        echo $LIGHTNING_RUNE && cd /root && ls -l
+        tail -f /dev/null
       "
 
 networks:
