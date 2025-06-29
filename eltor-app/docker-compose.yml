@@ -18,7 +18,7 @@ services:
       - "0.0.0.0:9996:9996"   # Tor relay OR port
     volumes:
       # TODO move to /home/user/.eltor
-      - ${APP_DATA_DIR}/data/eltor:/home/user/backend/bin/data
+      - ${APP_DATA_DIR}/data/eltor:/home/user/code/eltor-app/backend/bin/data
       - ${APP_DATA_DIR}/data/phoenix:/home/user/.phoenix
       - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/home/user/.lightning:ro
     user: "1000:1000"
@@ -32,7 +32,6 @@ services:
       - APP_ELTOR_BACKEND_PORT=${APP_ELTOR_BACKEND_PORT}
       - APP_ELTOR_HOST=${APP_ELTOR_HOST}
       - APP_ELTOR_USER_DIR=${APP_ELTOR_USER_DIR}
-      - APP_ELTOR_ELTORRC_PATH=${APP_ELTOR_ELTORRC_PATH}
 
       # LN env vars (from .env file)
       - APP_ELTOR_USE_PHOENIXD_EMBEDDED=${APP_ELTOR_USE_PHOENIXD_EMBEDDED}
@@ -78,7 +77,7 @@ services:
 
   # runs after the main service to update the torrc file with the LIGHTNING_RUNE
   # Replace the placeholder {{RUNE}} with the actual value from the environment
-  torrc-updater:
+  post_install:
     image: alpine:latest
     depends_on:
       web:
