@@ -4,11 +4,11 @@ services:
     init: true
     stop_grace_period: 1m
     ports:
-      - "0.0.0.0:5174:5174"   # Backend API - explicitly bind to all interfaces
-      - "0.0.0.0:5173:5173"   # Frontend web server - explicitly bind to all interfaces
-      - "0.0.0.0:9740:9740"   # Lightning node - explicitly bind to all interfaces
-      - "0.0.0.0:18058:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
-      - "0.0.0.0:9996:9996"   # Tor relay OR port
+      - "0.0.0.0:5184:5174"   # Backend API - explicitly bind to all interfaces
+      - "0.0.0.0:5183:5173"   # Frontend web server - explicitly bind to all interfaces
+      - "0.0.0.0:9750:9740"   # Lightning node - explicitly bind to all interfaces
+      - "0.0.0.0:18068:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
+      - "0.0.0.0:9997:9996"   # Tor relay OR port
     volumes:
       # TODO move to /home/user/.eltor
       - ${APP_DATA_DIR}/data/eltor:/home/user/code/eltor-app/backend/bin/data
@@ -87,8 +87,7 @@ services:
         echo 'torrc-updater ready for commands...' && 
         cd /tmp/.eltor/data/eltor &&
         cat torrc | sed 's/{{/$/g; s/}}//g' | envsubst > temp.txt && mv temp.txt torrc &&
-        cat torrc.relay | sed 's/{{/$/g; s/}}//g' | envsubst > temp.txt && mv temp.txt torrc.relay  &&
-        tail -f /dev/null
+        cat torrc.relay | sed 's/{{/$/g; s/}}//g' | envsubst > temp.txt && mv temp.txt torrc.relay
       "
 
 networks:
