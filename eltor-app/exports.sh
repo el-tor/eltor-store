@@ -11,8 +11,9 @@ export APP_ELTOR_ELTORRC_PATH="$APP_ELTOR_USER_DIR/code/eltor-app/backend/bin/da
 ### LN env vars
 ######################################
 export APP_ELTOR_USE_PHOENIXD_EMBEDDED=false
-export APP_ELTOR_LN_IMPLEMENTATION=APP_ELTOR_TOR_CLIENT_PAYMENT_LIGHTNING_NODE_CONFIG
-export APP_ELTOR_LN_CONFIG=$APP_ELTOR_LN_CONFIG
+export APP_ELTOR_LN_IMPLEMENTATION=cln
+export APP_ELTOR_LN_CONFIG="type=cln url=https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT rune=$LIGHTNING_RUNE default=true"
+export APP_ELTOR_LN_BOLT12="lno1234"
 
 ######################################
 ### Client Eltor Environment Variables
@@ -27,8 +28,6 @@ export APP_ELTOR_TOR_CONTROL_PORT="9992"
 export APP_ELTOR_TOR_HASHED_CONTROL_PASSWORD="16:281EC5644A4F548A60D50A0DD4DF835FFD50EDED062FD270D7269943DA"
 export APP_ELTOR_TOR_ADDRESS="127.0.0.1"
 export APP_ELTOR_TOR_PAYMENT_CIRCUIT_MAX_FEE="11000"
-# Placeholder - will be overridden by docker-compose environment
-export APP_ELTOR_TOR_CLIENT_PAYMENT_LIGHTNING_NODE_CONFIG="type=cln url=https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT rune=$LIGHTNING_RUNE default=true"
 
 ######################################
 ### Relay Eltor Environment Variables
@@ -51,5 +50,3 @@ export APP_ELTOR_TOR_RELAY_PAYMENT_RATE_MSATS="1000"
 export APP_ELTOR_TOR_RELAY_PAYMENT_INTERVAL="60"
 export APP_ELTOR_TOR_RELAY_PAYMENT_INTERVAL_ROUNDS="10"
 export APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE="11000"
-# Placeholder - will be overridden by docker-compose environment
-export APP_ELTOR_TOR_RELAY_PAYMENT_LIGHTNING_NODE_CONFIG="type=cln url=https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT rune=$LIGHTNING_RUNE default=true"
