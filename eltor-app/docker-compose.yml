@@ -70,8 +70,8 @@ services:
     # Replace the placeholder $$RUNE$$ with the actual value from the environment
     command: >
       sh -c "
-        sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /home/user/code/eltor-app/backend/bin/data/torrc &&
-        sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /home/user/code/eltor-app/backend/bin/data/torrc.relay
+        sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /home/user/backend/bin/data/torrc &&
+        sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /home/user/backend/bin/data/torrc.relay
       "
     restart: unless-stopped
     healthcheck:
