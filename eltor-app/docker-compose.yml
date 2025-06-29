@@ -86,11 +86,11 @@ services:
     env_file:
       - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
     volumes:
-      - ${APP_DATA_DIR}/data/eltor:/tmp
+      - ${APP_ELTOR_DATA_DIR}/data/eltor:/root
       - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/tmp/.lightning:ro
     command: >
       sh -c "
-        pwd && cd /tmp && ls -l
+        echo $LIGHTNING_RUNE && cd /root && ls -l
       "
 
 networks:
