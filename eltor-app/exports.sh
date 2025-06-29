@@ -12,7 +12,7 @@ export APP_ELTOR_ELTORRC_PATH="$APP_ELTOR_USER_DIR/code/eltor-app/backend/bin/da
 ######################################
 export APP_ELTOR_USE_PHOENIXD_EMBEDDED=false
 export APP_ELTOR_LN_IMPLEMENTATION=cln
-export APP_ELTOR_LN_CONFIG="type=cln url=https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT rune=$LIGHTNING_RUNE default=true"
+export APP_ELTOR_LN_CONFIG="$APP_ELTOR_LN_CONFIG"
 export APP_ELTOR_LN_BOLT12="lno1234"
 
 ######################################
