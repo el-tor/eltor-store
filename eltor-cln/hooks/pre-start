@@ -1,2 +1,6 @@
 echo "Pre start code printenv"
-printenv
+
+mkdir /home/user/prestart
+
+cd /home/user/prestart
+touch prestart.txt

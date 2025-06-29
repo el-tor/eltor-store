@@ -11,11 +11,10 @@ services:
     init: true
     stop_grace_period: 1m
     ports:
-      - "0.0.0.0:5184:5174"   # Backend API - explicitly bind to all interfaces
-      - "0.0.0.0:5183:5173"   # Frontend web server - explicitly bind to all interfaces
-      - "0.0.0.0:9780:9740"   # Lightning node - explicitly bind to all interfaces
-      - "0.0.0.0:18088:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
-      - "0.0.0.0:9986:9996"   # Tor relay OR port
+      - "0.0.0.0:5184:5184"   # Backend API - explicitly bind to all interfaces
+      - "0.0.0.0:5183:5183"   # Frontend web server - explicitly bind to all interfaces
+      - "0.0.0.0:18088:18088" # Tor SOCKS proxy - explicitly bind to all interfaces
+      - "0.0.0.0:9986:9986"   # Tor relay OR port
     volumes:
       # TODO move to /home/user/.eltor
       - ${APP_DATA_DIR}/data/eltor:/home/user/code/eltor-app/backend/bin/data
