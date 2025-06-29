@@ -40,8 +40,6 @@ services:
       - APP_ELTOR_USE_PHOENIXD_EMBEDDED=${APP_ELTOR_USE_PHOENIXD_EMBEDDED}
       - APP_ELTOR_LN_IMPLEMENTATION=${APP_ELTOR_LN_IMPLEMENTATION}
       - APP_ELTOR_LN_BOLT12=${APP_ELTOR_LN_BOLT12}
-      - APP_ELTOR_LN_CONFIG=type=cln url=https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT rune=$LIGHTNING_RUNE default=true
-
 
       # Client Eltor Environment Variables
       - APP_ELTOR_TOR_ADDITIONAL_DIR_AUTHORITY=${APP_ELTOR_TOR_ADDITIONAL_DIR_AUTHORITY}
@@ -69,6 +67,8 @@ services:
       - APP_ELTOR_TOR_RELAY_PAYMENT_INTERVAL_ROUNDS=${APP_ELTOR_TOR_RELAY_PAYMENT_INTERVAL_ROUNDS}
       - APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE=${APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE}
 
+
+    entrypoint: ["/entrypoint.sh"]
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${BACKEND_PORT:-5174}/health"]
@@ -78,23 +78,6 @@ services:
       start_period: 40s
     networks:
       - default
-
-  # runs after the main service to update the torrc file with the LIGHTNING_RUNE
-  # Replace the placeholder {{RUNE}} with the actual value from the environment
-  post_install:
-    image: alpine:latest
-    depends_on:
-      web:
-        condition: service_healthy
-    env_file:
-      - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
-    volumes:
-      - ${APP_ELTOR_DATA_DIR}:/tmp/.eltor
-      - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/tmp/.lightning:ro
-    command: >
-      sh -c "
-        echo 'torrc-updater ready for commands...' && tail -f /dev/null
-      "
 
 networks:
   default:
