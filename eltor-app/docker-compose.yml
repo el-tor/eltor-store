@@ -21,8 +21,6 @@ services:
       - ${APP_DATA_DIR}/data/phoenix:/home/user/.phoenix
       - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/home/user/.lightning:ro
     user: "1000:1000"
-    env_file:
-      - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
     environment:
       # Core Lightning env vars
       - APP_CORE_LIGHTNING_DAEMON_IP=${APP_CORE_LIGHTNING_DAEMON_IP}
@@ -67,12 +65,6 @@ services:
       - APP_ELTOR_TOR_RELAY_PAYMENT_INTERVAL_ROUNDS=${APP_ELTOR_TOR_RELAY_PAYMENT_INTERVAL_ROUNDS}
       - APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE=${APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE}
 
-    # Replace the placeholder $$RUNE$$ with the actual value from the environment
-    command: >
-      sh -c "
-        sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /home/user/code/eltor-app/backend/bin/data/torrc &&
-        sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /home/user/code/eltor-app/backend/bin/data/torrc.relay
-      "
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${BACKEND_PORT:-5174}/health"]
@@ -82,6 +74,24 @@ services:
       start_period: 40s
     networks:
       - default
+
+  # runs after the main service to update the torrc file with the LIGHTNING_RUNE
+  # Replace the placeholder {{RUNE}} with the actual value from the environment
+  torrc-updater:
+    image: alpine:latest
+    depends_on:
+      eltor:
+        condition: service_healthy
+    env_file:
+      - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
+    volumes:
+      - ${APP_DATA_DIR}/data/eltor:/home/user/backend/bin/data
+      - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/home/user/.lightning:ro
+    command: >
+      sh -c "
+        sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /home/user/backend/bin/data/torrc &&
+        sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /home/user/backend/bin/data/torrc.relay
+      "
 
 networks:
   default:
