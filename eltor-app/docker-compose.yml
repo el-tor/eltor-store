@@ -80,7 +80,7 @@ services:
   torrc-updater:
     image: alpine:latest
     depends_on:
-      eltor:
+      web:
         condition: service_healthy
     env_file:
       - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
