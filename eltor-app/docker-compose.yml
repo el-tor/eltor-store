@@ -80,7 +80,7 @@ services:
   # runs after the main service to update the torrc file with the LIGHTNING_RUNE
   # Replace the placeholder {{RUNE}} with the actual value from the environment
   post_install:
-    image: alpine:latest
+    image: ubuntu:latest
     depends_on:
       web:
         condition: service_healthy
