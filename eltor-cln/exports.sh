@@ -2,7 +2,7 @@
 ### Umbrel setting
 ######################################
 export APP_ELTOR_CLN_DATA_DIR="${EXPORTS_APP_DIR}"
-export APP_ELTOR_CLN_HOST="eltor-app_web_1"
+export APP_ELTOR_CLN_HOST="eltor-cln_web_1"
 
 ######################################
 ### App env vars
