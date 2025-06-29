@@ -94,8 +94,7 @@ services:
         echo 'torrc-updater ready for commands...' && 
         cd /tmp/.eltor/data/eltor &&
         cat torrc | sed 's/{{/$/g; s/}}//g' | envsubst > temp.txt && mv temp.txt torrc &&
-        cat torrc.relay | sed 's/{{/$/g; s/}}//g' | envsubst > temp.txt && mv temp.txt torrc.relay &&
-        tail -f /dev/null
+        cat torrc.relay | sed 's/{{/$/g; s/}}//g' | envsubst > temp.txt && mv temp.txt torrc.relay
       "
 
 networks:
