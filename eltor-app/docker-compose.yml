@@ -17,7 +17,7 @@ services:
       - "0.0.0.0:18058:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
       - "0.0.0.0:9996:9996"   # Tor relay OR port
     volumes:
-      - ${APP_DATA_DIR}/data/eltor:/home/user/code/eltor-app/backend/bin/data
+      - ${APP_DATA_DIR}/data/eltor:/home/user/backend/bin/data
       - ${APP_DATA_DIR}/data/phoenix:/home/user/.phoenix
       - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/home/user/.lightning:ro
     user: "1000:1000"
