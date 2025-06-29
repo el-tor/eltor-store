@@ -3,10 +3,10 @@ id: eltor-cln
 category: Bitcoin
 name: eltor-cln
 version: '0.0.7'
-tagline: eltor cln
+tagline: eltor
 icon: https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/eltor.png
 description: >-
-  Run El Tor with Core Lightning.
+  Run El Tor using Core Lightning.
 
   features:
 
