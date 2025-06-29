@@ -90,8 +90,7 @@ services:
       - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/tmp/.lightning:ro
     command: >
       sh -c "
-        sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /tmp/torrc &&
-        sed -i 's/{{RUNE}}/$$LIGHTNING_RUNE/g' /tmp/torrc.relay
+        pwd && cd /tmp && ls -l
       "
 
 networks:
