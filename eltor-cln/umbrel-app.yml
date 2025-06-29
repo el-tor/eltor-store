@@ -1,0 +1,34 @@
+manifestVersion: 1
+id: eltor-cln
+category: Bitcoin
+name: eltor-cln
+version: '0.0.7'
+tagline: eltor cln
+icon: https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/eltor.png
+description: >-
+  Run El Tor with Core Lightning.
+
+  features:
+
+  - paid circuit.
+
+  - high bandwidth tor network.
+
+releaseNotes: >-
+  Initial release of El Tor with Core Lightning.
+developer: eltor
+website: https://eltor.dev
+dependencies:
+  - core-lightning
+repo: https://github.com/el-tor/eltor-app
+support: https://github.com/el-tor/eltor-app/issues
+port: 5173
+gallery:
+  - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/1.png
+  - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/2.png
+  - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/3.png
+path: ''
+defaultUsername: ''
+defaultPassword: ''
+submitter: eltordev
+submission: https://github.com/el-tor/eltor-app/pull/1

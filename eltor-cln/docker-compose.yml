@@ -1,0 +1,104 @@
+services:
+  # app_proxy:
+  #   environment:
+  #     APP_HOST: $APP_HOST
+  #     APP_PORT: 5175
+  #     PROXY_AUTH_ADD: "false"
+  #   networks:
+  #     - default
+  web:
+    image: eltor/eltor-app@sha256:fb7f08cf33d1dab5cd5b5ed0e0bfca67d775bbd23fe8d45b2a808158f8dfcf20
+    init: true
+    stop_grace_period: 1m
+    ports:
+      - "0.0.0.0:5174:5174"   # Backend API - explicitly bind to all interfaces
+      - "0.0.0.0:5173:5173"   # Frontend web server - explicitly bind to all interfaces
+      - "0.0.0.0:9740:9740"   # Lightning node - explicitly bind to all interfaces
+      - "0.0.0.0:18058:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
+      - "0.0.0.0:9996:9996"   # Tor relay OR port
+    volumes:
+      # TODO move to /home/user/.eltor
+      - ${APP_DATA_DIR}/data/eltor:/home/user/code/eltor-app/backend/bin/data
+      - ${APP_DATA_DIR}/data/phoenix:/home/user/.phoenix
+      - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/home/user/.lightning:ro
+    user: "1000:1000"
+    env_file:
+      - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
+    environment:
+      # Core Lightning env vars
+      - APP_CORE_LIGHTNING_DAEMON_IP=${APP_CORE_LIGHTNING_DAEMON_IP}
+      - CORE_LIGHTNING_REST_PORT=${CORE_LIGHTNING_REST_PORT}
+
+      # App env vars
+      - APP_ELTOR_CLN_FRONTEND_PORT=${APP_ELTOR_CLN_FRONTEND_PORT}
+      - APP_ELTOR_CLN_BACKEND_PORT=${APP_ELTOR_CLN_BACKEND_PORT}
+      - APP_ELTOR_CLN_HOST=${APP_ELTOR_CLN_HOST}
+      - APP_ELTOR_CLN_USER_DIR=${APP_ELTOR_CLN_USER_DIR}
+
+      # LN env vars (from .env file)
+      - APP_ELTOR_CLN_USE_PHOENIXD_EMBEDDED=${APP_ELTOR_CLN_USE_PHOENIXD_EMBEDDED}
+      - APP_ELTOR_CLN_LN_IMPLEMENTATION=${APP_ELTOR_CLN_LN_IMPLEMENTATION}
+      - APP_ELTOR_CLN_LN_BOLT12=${APP_ELTOR_CLN_LN_BOLT12}
+      - APP_ELTOR_CLN_LN_CONFIG=type=cln url=https://$APP_CORE_LIGHTNING_DAEMON_IP:$CORE_LIGHTNING_REST_PORT rune={{LIGHTNING_RUNE}} default=true
+
+      # Client Eltor Environment Variables
+      - APP_ELTOR_CLN_TOR_ADDITIONAL_DIR_AUTHORITY=${APP_ELTOR_CLN_TOR_ADDITIONAL_DIR_AUTHORITY}
+      - APP_ELTOR_CLN_TOR_NICKNAME=${APP_ELTOR_CLN_TOR_NICKNAME}
+      - APP_ELTOR_CLN_TOR_DATA_DIRECTORY=${APP_ELTOR_CLN_TOR_DATA_DIRECTORY}
+      - APP_ELTOR_CLN_TOR_SOCKS_PORT=${APP_ELTOR_CLN_TOR_SOCKS_PORT}
+      - APP_ELTOR_CLN_TOR_CONTROL_PORT=${APP_ELTOR_CLN_TOR_CONTROL_PORT}
+      - APP_ELTOR_CLN_TOR_HASHED_CONTROL_PASSWORD=${APP_ELTOR_CLN_TOR_HASHED_CONTROL_PASSWORD}
+      - APP_ELTOR_CLN_TOR_CLIENT_ADDRESS=${APP_ELTOR_CLN_TOR_CLIENT_ADDRESS}
+      - APP_ELTOR_CLN_TOR_PAYMENT_CIRCUIT_MAX_FEE=${APP_ELTOR_CLN_TOR_PAYMENT_CIRCUIT_MAX_FEE}
+
+      # Relay Eltor Environment Variables
+      - APP_ELTOR_CLN_TOR_RELAY_ADDITIONAL_DIR_AUTHORITY=${APP_ELTOR_CLN_TOR_RELAY_ADDITIONAL_DIR_AUTHORITY}
+      - APP_ELTOR_CLN_TOR_RELAY_DATA_DIRECTORY=${APP_ELTOR_CLN_TOR_RELAY_DATA_DIRECTORY}
+      - APP_ELTOR_CLN_TOR_RELAY_CONTACT=${APP_ELTOR_CLN_TOR_RELAY_CONTACT}
+      - APP_ELTOR_CLN_TOR_RELAY_NICKNAME=${APP_ELTOR_CLN_TOR_RELAY_NICKNAME}
+      - APP_ELTOR_CLN_TOR_RELAY_OR_PORT=${APP_ELTOR_CLN_TOR_RELAY_OR_PORT}
+      - APP_ELTOR_CLN_TOR_RELAY_CONTROL_PORT=${APP_ELTOR_CLN_TOR_RELAY_CONTROL_PORT}
+      - APP_ELTOR_CLN_TOR_RELAY_SOCKS_PORT=${APP_ELTOR_CLN_TOR_RELAY_SOCKS_PORT}
+      - APP_ELTOR_CLN_TOR_RELAY_HASHED_CONTROL_PASSWORD=${APP_ELTOR_CLN_TOR_RELAY_HASHED_CONTROL_PASSWORD}
+      - APP_ELTOR_CLN_TOR_RELAY_SANDBOX=${APP_ELTOR_CLN_TOR_RELAY_SANDBOX}
+      - APP_ELTOR_CLN_TOR_EXIT_RELAY=${APP_ELTOR_CLN_TOR_EXIT_RELAY}
+      - APP_ELTOR_CLN_TOR_RELAY_PAYMENT_RATE_MSATS=${APP_ELTOR_CLN_TOR_RELAY_PAYMENT_RATE_MSATS}
+      - APP_ELTOR_CLN_TOR_RELAY_PAYMENT_INTERVAL=${APP_ELTOR_CLN_TOR_RELAY_PAYMENT_INTERVAL}
+      - APP_ELTOR_CLN_TOR_RELAY_PAYMENT_INTERVAL_ROUNDS=${APP_ELTOR_CLN_TOR_RELAY_PAYMENT_INTERVAL_ROUNDS}
+      - APP_ELTOR_CLN_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE=${APP_ELTOR_CLN_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE}
+
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${BACKEND_PORT:-5174}/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - default
+
+  # runs after the main service to update the torrc file with the LIGHTNING_RUNE
+  # Replace the placeholder {{LIGHTNING_RUNE}} with the actual value from the environment variable
+  post_install:
+    image: nginx:alpine
+    depends_on:
+      web:
+        condition: service_healthy
+    env_file:
+      - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
+    volumes:
+      - ${APP_ELTOR_CLN_DATA_DIR}:/tmp/.eltor
+      - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/tmp/.lightning:ro
+    command: >
+      sh -c "
+        echo 'torrc-updater ready for commands...' && 
+        cd /tmp/.eltor/data/eltor &&
+        cat torrc | sed 's/{{/$/g; s/}}//g' | envsubst > temp.txt && mv temp.txt torrc &&
+        cat torrc.relay | sed 's/{{/$/g; s/}}//g' | envsubst > temp.txt && mv temp.txt torrc.relay
+      "
+
+networks:
+  default:
+    name: umbrel_main_network
+    external: true
+    
