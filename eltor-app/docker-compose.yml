@@ -86,11 +86,11 @@ services:
     env_file:
       - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
     volumes:
-      - ${APP_ELTOR_DATA_DIR}/data/eltor:/root
+      - ${APP_DATA_DIR}/data/eltor:/root
       - ${APP_CORE_LIGHTNING_DATA_DIR:-/tmp/empty}:/tmp/.lightning:ro
     command: >
       sh -c "
-        tail -f /dev/null
+        echo 'torrc-updater ready for commands...' && tail -f /dev/null
       "
 
 networks:
