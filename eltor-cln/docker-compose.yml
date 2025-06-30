@@ -1,9 +1,13 @@
 services:
   app_proxy:
+    expose:
+      - "5171"
+    ports:
+      - "5171:5171"
     environment:
       # Frontend - serve the main UI
       APP_HOST: eltor-cln_web_1
-      APP_PORT: 5171
+      APP_PORT: 5173
       PROXY_AUTH_ADD: "false"
       
       # Backend API proxy - route /api/* and /health to backend port
@@ -34,10 +38,9 @@ services:
     image: eltor/eltor-app@sha256:fb7f08cf33d1dab5cd5b5ed0e0bfca67d775bbd23fe8d45b2a808158f8dfcf20
     init: true
     stop_grace_period: 1m
-    # Remove external port mappings - use app_proxy instead
     expose:
-      - "5173"  # Frontend
-      - "5174"  # Backend API
+      - "5173"
+      - "5174"
     ports:
       # Keep only Tor-specific ports that need external access
       - "0.0.0.0:18068:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
@@ -96,7 +99,7 @@ services:
 
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:${APP_ELTOR_BACKEND_PORT:-5184}/health"]
+      test: ["CMD", "curl", "-f", "http://eltor-cln_web_1:5174/health"]
       interval: 30s
       timeout: 10s
       retries: 3
