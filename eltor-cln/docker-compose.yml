@@ -29,18 +29,17 @@ services:
     user: "1000:1000"
     env_file:
       - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
-    environment:
-      - FRONTEND_PORT=5171
-      - BACKEND_PORT=5172
-      # optional defaults to window.location.hostname
-      # - BACKEND_URL
-      
+    environment:      
       # Core Lightning env vars
       - APP_CORE_LIGHTNING_DAEMON_IP=${APP_CORE_LIGHTNING_DAEMON_IP}
       - CORE_LIGHTNING_REST_PORT=${CORE_LIGHTNING_REST_PORT}
       - ACCEPT_INVALID_CERTS=true
 
       # App env vars
+      - FRONTEND_PORT=${FRONTEND_PORT}
+      - BACKEND_PORT=${BACKEND_PORT}
+      # optional defaults to window.location.hostname
+      # - BACKEND_URL
       - APP_ELTOR_FRONTEND_PORT=${APP_ELTOR_FRONTEND_PORT}
       - APP_ELTOR_BACKEND_PORT=${APP_ELTOR_BACKEND_PORT}
       - APP_ELTOR_HOST=${APP_ELTOR_HOST}

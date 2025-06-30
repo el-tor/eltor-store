@@ -7,8 +7,10 @@ export APP_ELTOR_HOST="eltor-cln_web_1"
 ######################################
 ### App env vars
 ######################################
-export APP_ELTOR_FRONTEND_PORT="5171"
-export APP_ELTOR_BACKEND_PORT="5172"
+export FRONTEND_PORT="5171"
+export BACKEND_PORT="5172"
+export APP_ELTOR_FRONTEND_PORT=$FRONTEND_PORT
+export APP_ELTOR_BACKEND_PORT=$BACKEND_PORT
 export APP_ELTOR_USER_DIR="/home/user"
 export APP_ELTOR_ELTORRC_PATH="/home/user/code/eltor-app/backend/bin/data"
 
