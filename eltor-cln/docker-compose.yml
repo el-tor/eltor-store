@@ -30,6 +30,11 @@ services:
     env_file:
       - ${APP_CORE_LIGHTNING_DATA_DIR}/.commando-env
     environment:
+      - FRONTEND_PORT=5171
+      - BACKEND_PORT=5172
+      # optional defaults to window.location.hostname
+      # - BACKEND_URL
+      
       # Core Lightning env vars
       - APP_CORE_LIGHTNING_DAEMON_IP=${APP_CORE_LIGHTNING_DAEMON_IP}
       - CORE_LIGHTNING_REST_PORT=${CORE_LIGHTNING_REST_PORT}
