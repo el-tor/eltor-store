@@ -4,16 +4,17 @@ services:
       - "5171"
     ports:
       - "5171:5171"
+      - "5172:5172"
     environment:
       # Frontend - serve the main UI
       APP_HOST: eltor-cln_web_1
-      APP_PORT: 5173
-      PROXY_AUTH_ADD: "false"
+      APP_PORT: 5171
+      PROXY_AUTH_ADD: "true"
       
       # Backend API proxy - route /api/* and /health to backend port
       PROXY_CUSTOM_CONFIG: |
         location /api/ {
-          proxy_pass http://eltor-cln_web_1:5174/api/;
+          proxy_pass http://eltor-cln_web_1:5172/api/;
           proxy_http_version 1.1;
           proxy_set_header Upgrade $$http_upgrade;
           proxy_set_header Connection 'upgrade';
@@ -25,7 +26,7 @@ services:
         }
         
         location /health {
-          proxy_pass http://eltor-cln_web_1:5174/health;
+          proxy_pass http://eltor-cln_web_1:5172/health;
           proxy_http_version 1.1;
           proxy_set_header Host $$host;
           proxy_set_header X-Real-IP $$remote_addr;
@@ -39,8 +40,8 @@ services:
     init: true
     stop_grace_period: 1m
     expose:
-      - "5173"
-      - "5174"
+      - "5171"
+      - "5172"
     ports:
       # Keep only Tor-specific ports that need external access
       - "0.0.0.0:18068:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
@@ -98,12 +99,12 @@ services:
       - APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE=${APP_ELTOR_TOR_RELAY_PAYMENT_CIRCUIT_MAX_FEE}
 
     restart: unless-stopped
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://eltor-cln_web_1:5171/health"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 3
-    #   start_period: 40s
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://eltor-cln_web_1:5172/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     networks:
       - default
 
