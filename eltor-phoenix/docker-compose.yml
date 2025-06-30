@@ -4,11 +4,11 @@ services:
     init: true
     stop_grace_period: 1m
     ports:
-      - "0.0.0.0:5164:5164"   # Backend API - explicitly bind to all interfaces
-      - "0.0.0.0:5163:5163"   # Frontend web server - explicitly bind to all interfaces
+      - "0.0.0.0:5164:5174"   # Backend API - explicitly bind to all interfaces
+      - "0.0.0.0:5163:5173"   # Frontend web server - explicitly bind to all interfaces
       - "0.0.0.0:9740:9740"   # Lightning node - explicitly bind to all interfaces
-      - "0.0.0.0:18068:18068" # Tor SOCKS proxy - explicitly bind to all interfaces
-      - "0.0.0.0:9994:9994"   # Tor relay OR port
+      - "0.0.0.0:18068:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
+      - "0.0.0.0:9964:9996"   # Tor relay OR port
     volumes:
       # TODO move to /home/user/.eltor
       - ${APP_DATA_DIR}/data/eltor:/home/user/code/eltor-app/backend/bin/data
@@ -57,7 +57,7 @@ services:
 
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:${APP_ELTOR_BACKEND_PORT:-5164}/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:5174}/health"]
       interval: 30s
       timeout: 10s
       retries: 3
