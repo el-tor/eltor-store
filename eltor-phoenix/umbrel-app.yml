@@ -1,12 +1,12 @@
 manifestVersion: 1
-id: eltor-app
+id: eltor-phoenix
 category: Bitcoin
-name: eltor-app
+name: eltor-phoenix
 version: '0.0.7'
 tagline: eltor
 icon: https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/eltor.png
 description: >-
-  Run El Tor.
+  Run El Tor using an embedded Phoenixd wallet.
 
   features:
 
@@ -18,11 +18,10 @@ releaseNotes: >-
   Initial release of El Tor.
 developer: eltor
 website: https://eltor.dev
-dependencies:
-  - core-lightning
+dependencies: []
 repo: https://github.com/el-tor/eltor-app
 support: https://github.com/el-tor/eltor-app/issues
-port: 5173
+port: 5163
 gallery:
   - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/1.png
   - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/2.png
