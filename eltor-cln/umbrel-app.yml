@@ -22,7 +22,7 @@ dependencies:
   - core-lightning
 repo: https://github.com/el-tor/eltor-app
 support: https://github.com/el-tor/eltor-app/issues
-port: 5183
+port: 5171
 gallery:
   - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/1.png
   - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/2.png
