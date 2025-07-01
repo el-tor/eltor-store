@@ -4,7 +4,6 @@ services:
       - "5172"
     ports:
       - "5172:5172"
-      - "9740:9740"
     environment:
       # Frontend - serve the main UI
       APP_HOST: eltor-phoenix_web_1
@@ -17,7 +16,7 @@ services:
     init: true
     stop_grace_period: 1m
     ports:
-      - "9740:9740"   # Lightning node - explicitly bind to all interfaces
+      - "0.0.0.0:9740:9740"   # Lightning node - explicitly bind to all interfaces
       - "0.0.0.0:18058:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
       - "0.0.0.0:9996:9996"   # Tor relay OR port
     volumes:
