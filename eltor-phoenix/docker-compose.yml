@@ -16,9 +16,6 @@ services:
     user: "1000:1000"
     environment:
       # App env vars
-      - APP_ELTOR_FRONTEND_PORT=${APP_ELTOR_FRONTEND_PORT}
-      - APP_ELTOR_BACKEND_PORT=${APP_ELTOR_BACKEND_PORT}
-      - APP_ELTOR_HOST=${APP_ELTOR_HOST}
       - APP_ELTOR_USER_DIR=${APP_ELTOR_USER_DIR}
       - ACCEPT_INVALID_CERTS=true
 

@@ -7,8 +7,9 @@ export APP_ELTOR_HOST="eltor-phoenix_web_1"
 ######################################
 ### App env vars
 ######################################
-export APP_ELTOR_FRONTEND_PORT="5173"
-export APP_ELTOR_BACKEND_PORT="5174"
+export BACKEND_PORT="${BACKEND_PORT:-5174}"
+export BIND_ADDRESS="${BIND_ADDRESS:-0.0.0.0}"
+export BACKEND_URL="${BACKEND_URL:-http://localhost:$BACKEND_PORT}"
 export APP_ELTOR_USER_DIR="/home/user"
 export APP_ELTOR_ELTORRC_PATH="/home/user/code/eltor-app/backend/bin/data"
 
