@@ -7,7 +7,7 @@ export APP_ELTOR_HOST="eltor-phoenix_web_1"
 ######################################
 ### App env vars
 ######################################
-export BACKEND_PORT="${BACKEND_PORT:-5174}"
+export BACKEND_PORT="${BACKEND_PORT:-5172}"
 export BIND_ADDRESS="${BIND_ADDRESS:-0.0.0.0}"
 export BACKEND_URL="${BACKEND_URL:-http://localhost:$BACKEND_PORT}"
 export APP_ELTOR_USER_DIR="/home/user"
@@ -28,7 +28,7 @@ export APP_ELTOR_TOR_ADDITIONAL_DIR_AUTHORITY=""
 # TODO user should be able to set this
 export APP_ELTOR_TOR_NICKNAME="elfdbe78324"
 export APP_ELTOR_TOR_DATA_DIRECTORY="/home/user/data/tor"
-export APP_ELTOR_TOR_SOCKS_PORT="18058"
+export APP_ELTOR_TOR_SOCKS_PORT="0.0.0.0:18058"
 export APP_ELTOR_TOR_CONTROL_PORT="9992"
 # password1234_
 export APP_ELTOR_TOR_HASHED_CONTROL_PASSWORD="16:281EC5644A4F548A60D50A0DD4DF835FFD50EDED062FD270D7269943DA"

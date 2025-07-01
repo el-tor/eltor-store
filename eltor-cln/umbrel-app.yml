@@ -1,7 +1,7 @@
 manifestVersion: 1
 id: eltor-cln
 category: Bitcoin
-name: eltor-cln
+name: El Tor - Core Lightning
 version: '0.0.7'
 tagline: eltor
 icon: https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/eltor.png
