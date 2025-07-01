@@ -30,8 +30,6 @@ services:
       - BACKEND_PORT=${BACKEND_PORT:-5172}
       - BACKEND_URL=${BACKEND_URL:-http://localhost:5172}
 
-      
-
       # App env vars
       - APP_ELTOR_USER_DIR=${APP_ELTOR_USER_DIR}
       - ACCEPT_INVALID_CERTS=true

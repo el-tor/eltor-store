@@ -21,7 +21,7 @@ website: https://eltor.dev
 dependencies: []
 repo: https://github.com/el-tor/eltor-app
 support: https://github.com/el-tor/eltor-app/issues
-port: 5174
+port: 5172
 gallery:
   - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/1.png
   - https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/2.png
