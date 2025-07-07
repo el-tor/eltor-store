@@ -12,7 +12,7 @@ services:
     networks:
       - default
   web:
-    image: eltor/eltor:latest
+    image: eltor/eltor:c6cbef11602d893c6974ec9396d815db5a05812f-amd64
     init: true
     stop_grace_period: 1m
     ports:
