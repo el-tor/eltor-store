@@ -18,7 +18,7 @@ services:
     ports:
       - "5172:5172"
       - "0.0.0.0:18058:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
-      - "0.0.0.0:18067:18057" # Tor Relay SOCKS proxy - explicitly bind to all interfaces
+      - "0.0.0.0:18057:18057" # Tor Relay SOCKS proxy - explicitly bind to all interfaces
       - "0.0.0.0:9996:9996"   # Tor relay OR port - explicitly bind to all interfaces
     volumes:
       # TODO move to /home/user/.eltor
