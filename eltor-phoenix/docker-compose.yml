@@ -12,12 +12,13 @@ services:
   #   networks:
   #     - default
   web:
-    image: eltor/eltor@sha256:5d5e74bd85b9e9f853ea8f0d89cee69fcbc5bfc1d72c9d6c49a872bfa7daa7dd
+    image: eltor/eltor@sha256:fae2c5402d2e4418a3c096a693b6d58342986d8cb332086f0aa46ce6cb90ee4c
     init: true
     stop_grace_period: 1m
     ports:
       - "5172:5172"
       - "0.0.0.0:18058:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
+      - "0.0.0.0:18067:18057" # Tor Relay SOCKS proxy - explicitly bind to all interfaces
       - "0.0.0.0:9996:9996"   # Tor relay OR port - explicitly bind to all interfaces
     volumes:
       # TODO move to /home/user/.eltor
