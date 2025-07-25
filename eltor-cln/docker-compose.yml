@@ -17,9 +17,9 @@ services:
     stop_grace_period: 1m
     ports:
       # Keep only Tor-specific ports that need external access
-      - "0.0.0.0:18068:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
-      - "0.0.0.0:18067:18057" # Tor Relay SOCKS proxy - explicitly bind to all interfaces
-      - "0.0.0.0:9997:9996"   # Tor relay OR port
+      - "0.0.0.0:18068:18068" # Tor SOCKS proxy - explicitly bind to all interfaces
+      - "0.0.0.0:18067:18067" # Tor Relay SOCKS proxy - explicitly bind to all interfaces
+      - "0.0.0.0:9997:9997"   # Tor relay OR port
     volumes:
       # TODO move to /home/user/.eltor
       - ${APP_DATA_DIR}/data/eltor:/home/user/code/eltor-app/backend/bin/data
