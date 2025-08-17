@@ -22,9 +22,6 @@ services:
     stop_grace_period: 1m
     ports:
       - "5171:5171"
-      - "18068:18068" # Tor SOCKS proxy - explicitly bind to all interfaces
-      - "18067:18067" # Tor Relay SOCKS proxy - explicitly bind to all interfaces
-      - "9997:9997"   # Tor relay OR port
     volumes:
       # TODO move to /home/user/.eltor
       - ${APP_DATA_DIR}/data/eltor:/home/user/code/eltor-app/backend/bin/data
