@@ -1,27 +1,30 @@
 services:
-  # app_proxy:
-  #   expose:
-  #     - "5171"
-  #     - "18068"
-  #     - "18067"
-  #   ports:
-  #     - "5171:5171"
-  #     - "0.0.0.0:18068:18068" # Tor SOCKS proxy - explicitly bind to all interfaces
-  #     - "0.0.0.0:18067:18067" # Tor Relay SOCKS proxy - explicitly bind to all interfaces
-  #     - "0.0.0.0:9997:9997"   # Tor relay OR port
-  #   environment:
-  #     # Frontend - serve the main UI
-  #     APP_HOST: eltor-cln_web_1
-  #     APP_PORT: 5171
-  #     PROXY_AUTH_ADD: "true"
-  #   networks:
-  #     - default
+  app_proxy:
+    expose:
+      - "5171"
+      - "18068"
+      - "18067"
+    ports:
+      - "5171:5171"
+      - "0.0.0.0:18068:18068" # Tor SOCKS proxy - explicitly bind to all interfaces
+      - "0.0.0.0:18067:18067" # Tor Relay SOCKS proxy - explicitly bind to all interfaces
+      - "0.0.0.0:9997:9997"   # Tor relay OR port
+    environment:
+      # Frontend - serve the main UI
+      APP_HOST: eltor-cln_web_1
+      APP_PORT: 5171
+      PROXY_AUTH_ADD: "true"
+    networks:
+      - default
   web:
     image: eltor/eltor@sha256:d89343009a6b1a3e806749571a367929a917263856e3e46857e29a70b06752d7
     init: true
     stop_grace_period: 1m
-    ports:
-      - "5171:5171"
+    # ports:
+    #   - "5171:5171"
+    #   - "0.0.0.0:18068:18068" # Tor SOCKS proxy - explicitly bind to all interfaces
+    #   - "0.0.0.0:18067:18067" # Tor Relay SOCKS proxy - explicitly bind to all interfaces
+    #   - "0.0.0.0:9997:9997"   # Tor relay OR port
     volumes:
       # TODO move to /home/user/.eltor
       - ${APP_DATA_DIR}/data/eltor:/home/user/code/eltor-app/backend/bin/data
