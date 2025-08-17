@@ -26,7 +26,7 @@ export APP_ELTOR_LN_IMPLEMENTATION=phoenixd
 ######################################
 export APP_ELTOR_TOR_ADDITIONAL_DIR_AUTHORITY=""
 # TODO user should be able to set this
-export APP_ELTOR_TOR_NICKNAME="elfdbe78324"
+# export APP_ELTOR_TOR_NICKNAME="elfdbe78324"
 export APP_ELTOR_TOR_DATA_DIRECTORY="/home/user/data/tor"
 export APP_ELTOR_TOR_SOCKS_PORT="0.0.0.0:18058"
 export APP_ELTOR_TOR_CONTROL_PORT="9992"
@@ -43,7 +43,7 @@ export APP_ELTOR_TOR_RELAY_DATA_DIRECTORY="/home/user/data/tor-relay"
 # export APP_ELTOR_TOR_RELAY_ADDRESS="X.X.X.X" # public IP or domain of the relay
 export APP_ELTOR_TOR_RELAY_CONTACT="eltorcontact"
 # TODO user should be able to set this
-export APP_ELTOR_TOR_RELAY_NICKNAME="elr1234567"
+# export APP_ELTOR_TOR_RELAY_NICKNAME="elr1234567"
 export APP_ELTOR_TOR_RELAY_OR_PORT="9996"
 export APP_ELTOR_TOR_RELAY_CONTROL_PORT="7781"
 export APP_ELTOR_TOR_RELAY_SOCKS_PORT="0.0.0.0:18057"

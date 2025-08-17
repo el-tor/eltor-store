@@ -1,22 +1,21 @@
 services:
-  # app_proxy:
-  #   expose:
-  #     - "5172"
-  #   ports:
-  #     - "5172:5172"
-  #   environment:
-  #     # Frontend - serve the main UI
-  #     APP_HOST: eltor-phoenix_web_1
-  #     APP_PORT: 5172
-  #     PROXY_AUTH_ADD: "false"
-  #   networks:
-  #     - default
+  app_proxy:
+    expose:
+      - "5172"
+    ports:
+      - "5172:5172"
+    environment:
+      # Frontend - serve the main UI
+      APP_HOST: eltor-phoenix_web_1
+      APP_PORT: 5172
+      PROXY_AUTH_ADD: "true"
+    networks:
+      - default
   web:
     image: eltor/eltor@sha256:5194902ec8b1f09efaa3994e5f0b58e5d9012b6653a6252e5865c6ae4a74f6a3
     init: true
     stop_grace_period: 1m
     ports:
-      - "5172:5172"
       - "0.0.0.0:18058:18058" # Tor SOCKS proxy - explicitly bind to all interfaces
       - "0.0.0.0:18057:18057" # Tor Relay SOCKS proxy - explicitly bind to all interfaces
       - "0.0.0.0:9996:9996"   # Tor relay OR port - explicitly bind to all interfaces
