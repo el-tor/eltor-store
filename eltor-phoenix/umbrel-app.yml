@@ -2,7 +2,7 @@ manifestVersion: 1
 id: eltor-phoenix
 category: Bitcoin
 name: El Tor - Phoenixd (Embedded Node)
-version: '0.0.15'
+version: '0.0.16'
 tagline: eltor
 icon: https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/eltor.png
 description: >-
