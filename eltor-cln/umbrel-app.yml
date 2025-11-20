@@ -18,12 +18,12 @@ description: >-
 
   Make sure to port forward the ORPort on your router if behind NAT. This setting
   is typically found in the "Port Forwarding" section of your router settings.
-  You need to forward port `9996` to the internal IP address of your Umbrel node. For example,
+  You need to forward port `9997` to the internal IP address of your Umbrel node. For example,
   if your Umbrel node's internal IP address is 192.168.1.4 then your port forwarding rule would look like this:
 
-  - External Port: `9996`
+  - External Port: `9997`
 
-  - Internal Port: `9996`
+  - Internal Port: `9997`
 
   - Internal IP Address: `192.168.1.4`
 
@@ -34,7 +34,7 @@ description: >-
   https://www.wikihow.com/Set-Up-Port-Forwarding-on-a-Router
 
 
-  Or if your router supports UPnP, you can use miniupnp with your Umbrels Local IP address `upnpc -a X.X.X.X 9996 9996 TCP`
+  Or if your router supports UPnP, you can use miniupnp with your Umbrels Local IP address `upnpc -a X.X.X.X 9997 9997 TCP`
 
 releaseNotes: >-
   Initial release of El Tor with Core Lightning.
