@@ -6,13 +6,26 @@ version: '0.0.17'
 tagline: eltor
 icon: https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/eltor.png
 description: >-
-  Run El Tor using an embedded Phoenixd wallet.
+  Run an El Tor Relay and get paid to an embedded Phoenixd wallet.
 
-  features:
-
-  - paid circuit.
-
-  - high bandwidth tor network.
+  A Phoenixd embedded wallet is ready for you to load up with sats and use.
+  
+  To Setup:
+  ---------
+  Router Port Forward (NAT) 
+  
+  Make sure to port forward the ORPort on your router if behind NAT. This setting
+  is typically found in the "Port Forwarding" section of your router settings. 
+  You need to forward port `9996` to the internal IP address of your Umbrel node. For example, 
+  if your Umbrel node's internal IP address is 192.168.1.4 then your port forwarding rule would look like this:
+  - External Port: `9996`
+  - Internal Port: `9996`
+  - Internal IP Address: `192.168.1.4`
+  - Protocol: `TCP`
+  See your router's documentation for specific instructions on how to set up port forwarding or visit
+  https://www.wikihow.com/Set-Up-Port-Forwarding-on-a-Router
+      
+  Or if your router supports UPnP, you can use miniupnp with your Umbrels Local IP address `upnpc -a X.X.X.X 9996 9996 TCP`
 
 releaseNotes: >-
   Initial release of El Tor.
