@@ -12,13 +12,14 @@ services:
     networks:
       - default
   web:
-    image: eltor/eltor@sha256:56965b64c1b195203f3b4128fe0d0d3d3d1b0b2f1fe1377829a4e10b3855a40a
+    image: eltor/eltor@sha256:8eda694834a2b07feffa332b29c967461a0efcf673168f01ddabf10ab553ea8a
     init: true
     stop_grace_period: 1m
     ports:
       - "0.0.0.0:18068:18068" # Tor SOCKS proxy - explicitly bind to all interfaces
       - "0.0.0.0:18067:18067" # Tor Relay SOCKS proxy - explicitly bind to all interfaces
       - "0.0.0.0:9997:9997"   # Tor relay OR port
+      - '0.0.0.0:18049:18049' # Tor SOCKS router i.e use this to point your socks5 config to in your browser
     volumes:
       # TODO move to /home/user/.eltor
       - ${APP_DATA_DIR}/data/eltor:/home/user/code/eltor-app/backend/bin/data
