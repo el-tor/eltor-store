@@ -4,7 +4,7 @@ category: Bitcoin
 name: El Tor - Phoenixd (Embedded Node)
 version: '0.0.18-1'
 tagline: eltor
-icon: https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/eltor.png
+icon: https://raw.githubusercontent.com/el-tor/eltor-store/refs/heads/master/icon/eltor-green.svg
 description: >-
   Run an El Tor Relay and get paid to an embedded Phoenixd wallet.
 
