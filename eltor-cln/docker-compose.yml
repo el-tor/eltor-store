@@ -90,6 +90,7 @@ services:
   # Replace the placeholder {{LIGHTNING_RUNE}} with the actual value from the environment variable
   post_install:
     image: nginx:alpine
+    user: "1000:1000"
     depends_on:
       web:
         condition: service_healthy
