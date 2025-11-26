@@ -103,8 +103,8 @@ services:
       sh -c "
         echo 'torrc-updater ready for commands...' && 
         cd /tmp/.eltor/data/eltor &&
-        sed \"s/{{LIGHTNING_RUNE}}/$LIGHTNING_RUNE/g\" torrc > temp.txt && mv temp.txt torrc &&
-        sed \"s/{{LIGHTNING_RUNE}}/$LIGHTNING_RUNE/g\" torrc.relay > temp.txt && mv temp.txt torrc.relay
+        sed 's/{{LIGHTNING_RUNE}}/'\"$$LIGHTNING_RUNE\"'/g' torrc > temp.txt && mv temp.txt torrc &&
+        sed 's/{{LIGHTNING_RUNE}}/'\"$$LIGHTNING_RUNE\"'/g' torrc.relay > temp.txt && mv temp.txt torrc.relay
       "
 
 networks:
